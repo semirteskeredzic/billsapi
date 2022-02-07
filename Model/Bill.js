@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { ObjectId } = require('mongodb');
 
 const BillSchema = new mongoose.Schema({
     name: {
@@ -6,11 +7,11 @@ const BillSchema = new mongoose.Schema({
         required: true
     },
     month: {
-        type: String,
+        type: Number,
         required: true
     },
     year: {
-        type: String,
+        type: Number,
         required: true
     },
     arrival: {
@@ -21,15 +22,26 @@ const BillSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    amount: {
+        type: Number,
+        required: true
+    },
     paid: {
         type: Boolean,
         default: false
+    },
+    utilityCompany: {
+        type: String
     },
     dateOfPayment: {
         type: Date
     },
     previousDebt: {
-        type: String,
+        type: Number,
+    },
+    user: {
+        type: ObjectId,
+        required: true
     },
     createdAt: {
         type: Date,

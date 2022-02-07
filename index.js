@@ -6,15 +6,19 @@ const cors = require('cors')
 
 dotenv.config()
 
+
 const PORT = process.env.PORT || 8000;
 
 const app = express()
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
 app.listen(PORT, async() => {
     console.log(`server running on port ${PORT}`)
 })
 
-app.use(cors());
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
