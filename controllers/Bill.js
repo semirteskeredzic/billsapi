@@ -15,6 +15,9 @@ const createBill = (req, res) => {
         month: req.body.month,
         year: req.body.year,
         arrival: req.body.arrival,
+        amount: req.body.amount,
+        utilityCompany: req.body.utilityCompany,
+        user: req.body.user,
         previousDebt: req.body.previousDebt
     })
 
