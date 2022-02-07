@@ -41,10 +41,13 @@ const deleteUser = (req, res) => {
 
 const loginUser = async(req, res) => {
     const body = req.body
+    console.log('body',body)
     const user = await User.findOne({ email: body.email })
+    console.log('user', user)
         if(user) {
         const token = generateToken(user)
         const validPassword = await bcrypt.compare(body.password, user.password)
+        console.log('valid', validPassword)
         if(validPassword) {
             res.set('Access-Control-Allow-Origin', req.headers.origin); //req.headers.origin
             res.set('Access-Control-Allow-Credentials', 'true');
@@ -52,12 +55,12 @@ const loginUser = async(req, res) => {
             res.set(
                 'Access-Control-Expose-Headers',
                 'date, etag, access-control-allow-origin, access-control-allow-credentials'
-            );
+            )
             res.cookie('rest-auth-cookie', token, {
             httpOnly: true,
             sameSite: 'strict',
-          })
-        .status(200)
+            })
+            res.sendStatus(200)
         } else {
             res.status(400).json({ error: "Invalid password" })
         }
