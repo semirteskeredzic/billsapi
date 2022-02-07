@@ -16,8 +16,8 @@ router.put('/bills/:billID', middleware.verify, updateBill)
 
 router.delete('/bills/:billID', middleware.verify, deleteBill)
 
-router.post('/login', middleware.verify, loginUser)
+router.post('/login', loginUser)
 
-router.post('/register', middleware.verify, registerUser)
+router.post('/register', registerUser)
 
 module.exports = router
