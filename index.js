@@ -3,15 +3,16 @@ const router = require('./router')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const cors = require('cors')
+const cookieParser = require('cookie-parser');
 
 dotenv.config()
-
 
 const PORT = process.env.PORT || 8000;
 
 const app = express()
 app.use(cors({
-    origin: 'http://localhost:3000'
+    credentials: true,
+    origin: 'https://main--quizzical-nightingale-24657e.netlify.app',
 }));
 
 app.listen(PORT, async() => {
@@ -19,6 +20,7 @@ app.listen(PORT, async() => {
 })
 
 
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

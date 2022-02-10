@@ -51,16 +51,15 @@ const loginUser = async(req, res) => {
         }
         const validPassword = await bcrypt.compare(body.password, user.password)
         if(validPassword) {
-            res.set('Access-Control-Allow-Origin', req.headers.origin); //req.headers.origin
+            res.set('Access-Control-Allow-Origin', req.headers.origin);
             res.set('Access-Control-Allow-Credentials', 'true');
-            // access-control-expose-headers allows JS in the browser to see headers other than the default 7
             res.set(
                 'Access-Control-Expose-Headers',
                 'date, etag, access-control-allow-origin, access-control-allow-credentials'
             )
-            res.cookie('rest-auth-cookie', token, {
+            res.cookie('auth-token', token, {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'strict'
             })
             res.status(200).json(userObject)
         } else {
@@ -92,9 +91,21 @@ const registerUser = async(req, res) => {
     )
 }
 
+const getUser = (req, res) => {
+    User.findOne(
+        { _id: req.params.userID },
+        (err, User) => {
+            if(err) {
+                res.send(err)
+            } else res.json(User._id)
+        }
+    )
+}
+
 module.exports = {
     updateUser,
     deleteUser,
     loginUser,
-    registerUser
+    registerUser,
+    getUser
 }

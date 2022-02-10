@@ -1,10 +1,14 @@
 const Bill = require('../Model/Bill')
 
 const getBills = (req, res) => {
+    console.log('request', req)
+    req.set('Access-Control-Allow-Origin', req.headers.origin); //req.headers.origin
+    req.set('Access-Control-Allow-Credentials', 'true');
     Bill.find((err, bills) => {
         if(err) {
             res.send(err)
         }
+        
         res.json(bills)
     })
 }

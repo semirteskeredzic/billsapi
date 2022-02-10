@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
 
 dotenv.config()
-const tokenSecret = process.env.TOKEN_SECRET
+const tokenSecret = 'fkfebdSINqWq1QuQk0C7'
+
 
 exports.verify = (req, res, next) => {
     const token = req.headers.authorization

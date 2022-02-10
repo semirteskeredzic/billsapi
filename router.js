@@ -1,5 +1,5 @@
 const { getBills, createBill, updateBill, deleteBill } = require('./controllers/Bill')
-const { loginUser, registerUser } = require('./controllers/User')
+const { loginUser, registerUser, getUser } = require('./controllers/User')
 const middleware = require('./middleware')
 
 const router = require('express').Router()
@@ -19,5 +19,7 @@ router.delete('/bills/:billID', middleware.verify, deleteBill)
 router.post('/login', loginUser)
 
 router.post('/register', registerUser)
+
+router.get('/user/:userID', middleware.verify, getUser)
 
 module.exports = router
