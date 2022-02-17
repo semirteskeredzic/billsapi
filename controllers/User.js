@@ -51,6 +51,7 @@ const loginUser = async(req, res) => {
         }
         const validPassword = await bcrypt.compare(body.password, user.password)
         if(validPassword) {
+            console.log('validpassword')
             res.set('Access-Control-Allow-Origin', req.headers.origin);
             res.set('Access-Control-Allow-Credentials', 'true');
             res.set(
@@ -61,7 +62,6 @@ const loginUser = async(req, res) => {
             httpOnly: true,
             origin: `${process.env.FRONTEND_URL}`,
             })
-            res.cookie('user', userObject.userId)
             res.status(200).json(userObject)
         } else {
             res.status(400).json({ error: "Invalid password" })
