@@ -10,17 +10,18 @@ dotenv.config()
 const PORT = process.env.PORT || 8000;
 
 const app = express()
+app.use(cookieParser());
 app.use(cors({
+    // origin: 'https://main--quizzical-nightingale-24657e.netlify.app',
+    origin: [`${process.env.FRONTEND_URL}`],
+    methods: ['GET', 'POST', 'PUT'],
+    allowedHeaders:  ['origin','Content-Type','Authorization','accept','x-csrf-token'],
     credentials: true,
-    origin: 'https://main--quizzical-nightingale-24657e.netlify.app',
 }));
 
 app.listen(PORT, async() => {
     console.log(`server running on port ${PORT}`)
 })
-
-
-app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

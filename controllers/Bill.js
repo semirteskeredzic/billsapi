@@ -1,14 +1,29 @@
 const Bill = require('../Model/Bill')
+const { ObjectId } = require('mongodb');
 
 const getBills = (req, res) => {
-    console.log('request', req)
-    req.set('Access-Control-Allow-Origin', req.headers.origin); //req.headers.origin
-    req.set('Access-Control-Allow-Credentials', 'true');
-    Bill.find((err, bills) => {
+    Bill.find({user: req.params.userId}, (err, bills) => {
         if(err) {
             res.send(err)
         }
-        
+        res.json(bills)
+    })
+}
+
+const getUnpaidBills = (req, res) => {
+    Bill.find({paid: false, user: ObjectId(req.query.userId) }, (err,bills) => {
+        if(err) {
+            res.send(err)
+        }
+        res.json(bills)
+    })
+}
+
+const getPaidBills = (req, res) => {
+    Bill.find({paid: true, user: ObjectId(req.query.userId)}, (err,bills) => {
+        if(err) {
+            res.send(err)
+        }
         res.json(bills)
     })
 }
@@ -49,7 +64,10 @@ const updateBill = (req, res) => {
 
 const payBill = (req, res) => {
     Bill.findOneAndUpdate(
-        { _id: req.params.billID },
+        { 
+            _id: req.body.billID,
+            user: ObjectId(req.body.userId)
+        },
         {
             $set: req.body
         },
@@ -71,8 +89,10 @@ const deleteBill = (req, res) => {
 
 module.exports = {
     getBills,
+    getUnpaidBills,
     createBill,
     updateBill,
     payBill,
-    deleteBill
+    deleteBill,
+    getPaidBills
 }

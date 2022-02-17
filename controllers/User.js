@@ -59,8 +59,9 @@ const loginUser = async(req, res) => {
             )
             res.cookie('auth-token', token, {
             httpOnly: true,
-            sameSite: 'strict'
+            origin: `${process.env.FRONTEND_URL}`,
             })
+            res.cookie('user', userObject.userId)
             res.status(200).json(userObject)
         } else {
             res.status(400).json({ error: "Invalid password" })

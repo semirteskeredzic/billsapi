@@ -31,13 +31,15 @@ const BillSchema = new mongoose.Schema({
         default: false
     },
     utilityCompany: {
-        type: String
+        type: String,
+        default: 'None'
     },
     dateOfPayment: {
         type: Date
     },
     previousDebt: {
         type: Number,
+        default: 0
     },
     user: {
         type: ObjectId,
