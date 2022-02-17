@@ -71,6 +71,12 @@ const loginUser = async(req, res) => {
     }
 }
 
+const logOutUser = async(req, res) => {
+    res.clearCookie('auth-token')
+    res.clearCookie('user')
+    res.end()
+}
+
 const registerUser = async(req, res) => {
     const body = req.body
 
@@ -108,5 +114,6 @@ module.exports = {
     deleteUser,
     loginUser,
     registerUser,
-    getUser
+    getUser,
+    logOutUser
 }
