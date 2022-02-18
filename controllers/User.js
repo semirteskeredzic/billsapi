@@ -61,7 +61,7 @@ const loginUser = async(req, res) => {
             httpOnly: true,
             origin: `${process.env.FRONTEND_URL}`,
             sameSite: 'None',
-            secure
+            secure: true
             })
             res.status(200).json(userObject)
         } else {
