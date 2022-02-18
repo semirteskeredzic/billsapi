@@ -60,8 +60,6 @@ const loginUser = async(req, res) => {
             res.cookie('auth-token', token, {
             httpOnly: true,
             origin: `${process.env.FRONTEND_URL}`,
-            secure: true,
-            sameSite: 'none',
             })
             res.status(200).json(userObject)
         } else {
