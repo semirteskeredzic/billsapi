@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(cors({
     // origin: 'https://main--quizzical-nightingale-24657e.netlify.app',
     origin: [`${process.env.FRONTEND_URL}`],
-    methods: ['GET', 'POST', 'PUT'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders:  ['origin','Content-Type','Authorization','accept','x-csrf-token'],
     credentials: true,
 }));
