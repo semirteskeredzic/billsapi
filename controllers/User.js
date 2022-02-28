@@ -88,15 +88,15 @@ const registerUser = async(req, res) => {
 
     const user = new User(body)
 
-    console.log('user',user)
+    // console.log('user',user)
 
-    const salt = await bcrypt.genSalt(10)
+    // const salt = await bcrypt.genSalt(10)
 
-    console.log('salt',salt)
+    // console.log('salt',salt)
 
-    user.password = await bcrypt.hash(user.password, salt)
+    // user.password = await bcrypt.hash(user.password, salt)
 
-    console.log('user pass', user.password)
+    // console.log('user pass', user.password)
 
    user.save().then(
        res.status(201).send(
