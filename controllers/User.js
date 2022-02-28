@@ -80,7 +80,7 @@ const registerUser = async(req, res) => {
     const body = req.body.record
     console.log('body',body)
 
-    if(!(body.email && body.password)) {
+    if(!(body.email)) {
         return res.status(400).send({
             error: "Data not formatted properly"
         })
