@@ -20,7 +20,6 @@ exports.verify = async (req, res, next) => {
         }
     }
 
-
     // const token = req.headers.cookie.split(" ")[0]
     // if(!token) res.status(403).json({ error: "please provide a token" })
     // else {
