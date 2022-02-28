@@ -42,7 +42,7 @@ const BillSchema = new mongoose.Schema({
         default: 0
     },
     user: {
-        type: ObjectId,
+        type: String,
         required: true
     },
     createdAt: {

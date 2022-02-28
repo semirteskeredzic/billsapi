@@ -31,6 +31,7 @@ const getPaidBills = (req, res) => {
 }
 
 const createBill = (req, res) => {
+    console.log('req body', req.body)
     const bill = new Bill({
         name: req.body.name,
         month: req.body.month,
