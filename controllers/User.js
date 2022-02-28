@@ -77,7 +77,7 @@ const logOutUser = async(req, res) => {
 }
 
 const registerUser = async(req, res) => {
-    const body = req.body
+    const body = req.body.record
     console.log('body',body)
     console.log('req',req)
 

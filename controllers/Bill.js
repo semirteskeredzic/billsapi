@@ -2,7 +2,8 @@ const Bill = require('../Model/Bill')
 const { ObjectId } = require('mongodb');
 
 const getBills = (req, res) => {
-    Bill.find({user: req.params.userId}, (err, bills) => {
+    console.log('getbills',req)
+    Bill.find({user: req.query.userId}, (err, bills) => {
         if(err) {
             res.send(err)
         }
@@ -11,6 +12,7 @@ const getBills = (req, res) => {
 }
 
 const getUnpaidBills = (req, res) => {
+    console.log('unpaid', req)
     Bill.find({paid: false, user: ObjectId(req.query.userId) }, (err,bills) => {
         if(err) {
             res.send(err)
