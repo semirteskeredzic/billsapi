@@ -2,8 +2,7 @@ const Bill = require('../Model/Bill')
 const { ObjectId } = require('mongodb');
 
 const getBills = (req, res) => {
-    console.log('getbills',req)
-    Bill.find({user: req.query.userId}, (err, bills) => {
+    Bill.find({user: req.user}, (err, bills) => {
         if(err) {
             res.send(err)
         }
@@ -12,8 +11,7 @@ const getBills = (req, res) => {
 }
 
 const getUnpaidBills = (req, res) => {
-    console.log('unpaid', req)
-    Bill.find({paid: false, user: ObjectId(req.query.userId) }, (err,bills) => {
+    Bill.find({paid: false, user: req.user }, (err,bills) => {
         if(err) {
             res.send(err)
         }
@@ -22,7 +20,7 @@ const getUnpaidBills = (req, res) => {
 }
 
 const getPaidBills = (req, res) => {
-    Bill.find({paid: true, user: ObjectId(req.query.userId)}, (err,bills) => {
+    Bill.find({paid: true, user: req.user}, (err,bills) => {
         if(err) {
             res.send(err)
         }
@@ -31,7 +29,6 @@ const getPaidBills = (req, res) => {
 }
 
 const createBill = (req, res) => {
-    console.log('req body', req.body)
     const bill = new Bill({
         name: req.body.name,
         month: req.body.month,
@@ -39,7 +36,7 @@ const createBill = (req, res) => {
         arrival: req.body.arrival,
         amount: req.body.amount,
         utilityCompany: req.body.utilityCompany,
-        user: req.body.user,
+        user: req.user,
         previousDebt: req.body.previousDebt
     })
 
@@ -69,7 +66,7 @@ const payBill = (req, res) => {
     Bill.findOneAndUpdate(
         { 
             _id: req.body.billID,
-            user: ObjectId(req.body.userId)
+            user: req.user
         },
         {
             $set: req.body
@@ -86,7 +83,7 @@ const payBill = (req, res) => {
 const deleteBill = (req, res) => {
     Bill.findOneAndDelete(
         { _id: req.params.billID }
-    ).then(() => res.json({ message: 'Bill deleted' }))
+    ).then(res.json({message: 'Bill deleted'}))
     .catch((err) => res.send(err))
 }
 

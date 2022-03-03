@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { ObjectId } = require('mongodb');
 
 const BillSchema = new mongoose.Schema({
     name: {
@@ -43,7 +42,7 @@ const BillSchema = new mongoose.Schema({
     },
     user: {
         type: String,
-        required: true
+        required: false
     },
     createdAt: {
         type: Date,

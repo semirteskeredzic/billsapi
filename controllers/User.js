@@ -78,7 +78,6 @@ const logOutUser = async(req, res) => {
 
 const registerUser = async(req, res) => {
     const body = req.body.record
-    console.log('body',body)
 
     if(!(body.email)) {
         return res.status(400).send({
@@ -87,18 +86,7 @@ const registerUser = async(req, res) => {
     }
 
     const user = new User(body)
-
-    // console.log('user',user)
-
-    // const salt = await bcrypt.genSalt(10)
-
-    // console.log('salt',salt)
-
-    // user.password = await bcrypt.hash(user.password, salt)
-
-    // console.log('user pass', user.password)
-
-   user.save().then(
+    user.save().then(
        res.status(201).send(
            'user created'
         //    {token: generateToken(user)}
