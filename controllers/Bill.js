@@ -28,6 +28,31 @@ const getPaidBills = (req, res) => {
     })
 }
 
+const getDueBills = (req, res) => {
+    Bill.find({paid:false, user: req.user}, (err,bills) => {
+        if(err) {
+            res.send(err)
+        }
+        else {
+            let result = bills?.map(({amount}) => amount)
+            let sum = result.reduce((a,b) => a + b, 0)
+            res.json(sum)
+        }
+    })
+}
+
+const getPaidBillsTotal = (req, res) => {
+    Bill.find({paid:true, user: req.user}, (err,bills) => {
+        if(err) {
+            res.send(err)
+        } else {
+            let result = bills?.map(({amount}) => amount)
+            let sum = result.reduce((a,b) => a + b, 0)
+            res.json(sum)
+        }
+    })
+}
+
 const createBill = (req, res) => {
     const bill = new Bill({
         name: req.body.name,
@@ -92,6 +117,8 @@ module.exports = {
     getUnpaidBills,
     createBill,
     updateBill,
+    getDueBills,
+    getPaidBillsTotal,
     payBill,
     deleteBill,
     getPaidBills

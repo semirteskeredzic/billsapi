@@ -1,4 +1,4 @@
-const { getBills, createBill, updateBill, deleteBill, getUnpaidBills, payBill, getPaidBills } = require('./controllers/Bill')
+const { getBills, createBill, updateBill, deleteBill, getUnpaidBills, payBill, getPaidBills, getDueBills, getPaidBillsTotal } = require('./controllers/Bill')
 const { loginUser, registerUser, getUser, logOutUser } = require('./controllers/User')
 const middleware = require('./middleware')
 
@@ -11,6 +11,10 @@ router.get('/', middleware.verify,  (req, res) => {
 router.get('/bills', middleware.verify, getBills)
 
 router.get('/unpaidbills', middleware.verify, getUnpaidBills)
+
+router.get('/duebills', middleware.verify, getDueBills)
+
+router.get('/paidbillstotal', middleware.verify, getPaidBillsTotal)
 
 router.get('/paidbills', middleware.verify, getPaidBills)
 
