@@ -17,6 +17,7 @@ const createUtilityCompany = (req, res) => {
         address: req.body.address,
         city: req.body.city,
         country: req.body.country,
+        icon: req.body.icon,
         phone: req.body.phone,
         email: req.body.email,
         website: req.body.website,
@@ -42,12 +43,10 @@ const updateUtilityCompany = (req, res) => {
 )}
 
 const deleteUtilityCompany = (req, res) => {
-    UtilityCompany.findByIdAndDelete(req.params.id, (err, utilityCompany) => {
-        if(err) {
-            res.send(err)
-        }
-        res.json(utilityCompany)
-    }).catch(err => res.send(err))}
+    UtilityCompany.findByIdAndDelete(req.params.utilityCompanyID
+        ).then(console.log('Utility Company deleted')
+        ).catch((err) => console.log(err))}
+
 
 module.exports = {
     getUtilityCompanies,

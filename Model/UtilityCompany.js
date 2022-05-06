@@ -23,6 +23,9 @@ const utilityCompanySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    icon: {
+        type: String
+    },
     phone: {
         type: String
     },
