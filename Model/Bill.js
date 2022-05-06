@@ -34,7 +34,8 @@ const BillSchema = new mongoose.Schema({
         default: 'None'
     },
     dateOfPayment: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
     previousDebt: {
         type: Number,
