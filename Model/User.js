@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: "primaryUser"
     },
+    country: {
+        type: String
+    },
     connectedUser: {
         type: ObjectId
     },
