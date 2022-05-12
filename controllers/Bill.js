@@ -1,4 +1,5 @@
 const Bill = require('../Model/Bill')
+const UtilityCompany = require('../Model/UtilityCompany')
 const { ObjectId } = require('mongodb');
 
 const getBills = (req, res) => {
@@ -15,8 +16,26 @@ const getUnpaidBills = (req, res) => {
         if(err) {
             res.send(err)
         }
+        const newBill = []
+        bills.map(bill => {
+            
+            UtilityCompany.findOne({_id: bill.utilityCompany}, (err,utilityCompany) => {
+                if(err) {
+                    res.send(err)
+                }
+                newBill.push(bill)
+                // companies.push(utilityCompany)
+                // console.log('companies', companies)
+                
+            })
+        })
+        
+        console.log('NEW bill', newBill)
+        // console.log('bills',bills)
         res.json(bills)
     })
+    
+    
 }
 
 const getPaidBills = (req, res) => {
