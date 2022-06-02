@@ -4,7 +4,6 @@ const { ObjectId } = require('mongodb');
 const BillSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
     },
     month: {
         type: Number,
