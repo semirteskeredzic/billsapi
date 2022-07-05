@@ -15,7 +15,15 @@ const getUnpaidBills = (req, res) => {
         if(err) {
             res.send(err)
         }
-        res.json(bills)
+        const sorted = bills.sort((a,b) => b.month - a.month)
+        const groupByYear = sorted.reduce((group, bill) => {
+            const { year } = bill;
+            group[year] = group[year] ?? [];
+            group[year].push(bill);
+            return group;
+        }, {})
+       // const sortedYear = Object.entries(groupByYear).sort().reverse()
+        res.json(groupByYear)
     })
 }
 
@@ -24,7 +32,15 @@ const getPaidBills = (req, res) => {
         if(err) {
             res.send(err)
         }
-        res.json(bills)
+        const sorted = bills.sort((a,b) => b.month - a.month)
+        const groupByYear = sorted.reduce((group, bill) => {
+            const { year } = bill;
+            group[year] = group[year] ?? [];
+            group[year].push(bill);
+            return group;
+        }, {})
+       // const sortedYear = Object.entries(groupByYear).sort().reverse()
+        res.json(groupByYear)
     })
 }
 
