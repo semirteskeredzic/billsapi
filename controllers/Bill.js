@@ -139,7 +139,7 @@ const deleteBill = (req, res) => {
 }
 
 const getPreviousBillCompare = (req, res) => {
-    if(req.query.month === 1) {
+    if(req.query.month == 1) {
         Bill.findOne({
             utilityCompany: req.query.utilityCompany, month: 12, year: req.query.year - 1
         }, (err, bill) => {
