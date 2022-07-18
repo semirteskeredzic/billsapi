@@ -139,15 +139,25 @@ const deleteBill = (req, res) => {
 }
 
 const getPreviousBillCompare = (req, res) => {
-    console.log('req params',req.query)
-    Bill.findOne({
-        utilityCompany: req.query.utilityCompany, month: req.query.month - 1, year: req.query.year
-    }, (err, bill) => {
-        if(err) console.log(err)
-        else {
-            res.json(bill)
-        }
-    })
+    if(req.query.month === 1) {
+        Bill.findOne({
+            utilityCompany: req.query.utilityCompany, month: 12, year: req.query.year - 1
+        }, (err, bill) => {
+            if(err) console.log(err)
+            else {
+                res.json(bill)
+            }
+        })
+    } else {
+        Bill.findOne({
+            utilityCompany: req.query.utilityCompany, month: req.query.month - 1, year: req.query.year
+        }, (err, bill) => {
+            if(err) console.log(err)
+            else {
+                res.json(bill)
+            }
+        })
+    }    
 }
 
 module.exports = {
