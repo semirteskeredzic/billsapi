@@ -27,6 +27,16 @@ const getUnpaidBills = (req, res) => {
     })
 }
 
+const getUnpaidBillsWidget = (req, res) => {
+    Bill.find({paid: false, user: req.user}, (err, bills) => {
+        if(err) {
+            res.send(err)
+        } else {
+            res.json(bills)
+        }
+    })
+}
+
 const getPaidBills = (req, res) => {
     Bill.find({paid: true, user: req.user}, (err,bills) => {
         if(err) {
@@ -128,14 +138,38 @@ const deleteBill = (req, res) => {
     .catch((err) => res.send(err))
 }
 
+const getPreviousBillCompare = (req, res) => {
+    if(req.query.month == 1) {
+        Bill.findOne({
+            utilityCompany: req.query.utilityCompany, month: 12, year: req.query.year - 1
+        }, (err, bill) => {
+            if(err) console.log(err)
+            else {
+                res.json(bill)
+            }
+        })
+    } else {
+        Bill.findOne({
+            utilityCompany: req.query.utilityCompany, month: req.query.month - 1, year: req.query.year
+        }, (err, bill) => {
+            if(err) console.log(err)
+            else {
+                res.json(bill)
+            }
+        })
+    }    
+}
+
 module.exports = {
     getBills,
     getUnpaidBills,
+    getUnpaidBillsWidget,
     createBill,
     updateBill,
     getDueBills,
     getPaidBillsTotal,
     payBill,
     deleteBill,
-    getPaidBills
+    getPaidBills,
+    getPreviousBillCompare
 }

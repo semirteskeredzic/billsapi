@@ -1,4 +1,4 @@
-const { getBills, createBill, updateBill, deleteBill, getUnpaidBills, payBill, getPaidBills, getDueBills, getPaidBillsTotal } = require('./controllers/Bill')
+const { getBills, createBill, updateBill, deleteBill, getUnpaidBills, payBill, getPaidBills, getDueBills, getPaidBillsTotal, getPreviousBillCompare, getUnpaidBillsWidget } = require('./controllers/Bill')
 const { loginUser, registerUser, getUser, logOutUser } = require('./controllers/User')
 const { getUtilityCompanies, createUtilityCompany, deleteUtilityCompany, updateUtilityCompany } = require('./controllers/UtilityCompany')
 const middleware = require('./middleware')
@@ -13,6 +13,8 @@ router.get('/bills', middleware.verify, getBills)
 
 router.get('/unpaidbills', middleware.verify, getUnpaidBills)
 
+router.get('/unpaidbillswidget', middleware.verify, getUnpaidBillsWidget)
+
 router.get('/duebills', middleware.verify, getDueBills)
 
 router.get('/paidbillstotal', middleware.verify, getPaidBillsTotal)
@@ -20,6 +22,8 @@ router.get('/paidbillstotal', middleware.verify, getPaidBillsTotal)
 router.get('/paidbills', middleware.verify, getPaidBills)
 
 router.post('/bills', middleware.verify, createBill)
+
+router.get('/getPreviousBillCompare', middleware.verify, getPreviousBillCompare)
 
 router.put('/bills/:billID', middleware.verify, updateBill)
 
